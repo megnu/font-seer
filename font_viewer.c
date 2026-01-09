@@ -10,11 +10,15 @@ typedef struct {
     GtkWidget *weight;
     GtkWidget *slant;
     GtkWidget *spacing;
+    GtkWidget *postscript;
+    GtkWidget *pattern;
 } FontFields;
 
 static void
 set_entry(GtkWidget *entry, const char *text)
 {
+    if (!GTK_IS_ENTRY(entry))
+        return;
     gtk_entry_set_text(GTK_ENTRY(entry), text ? text : "");
 }
 
@@ -45,9 +49,21 @@ font_changed_cb(GObject *object, GParamSpec *pspec, gpointer user_data)
     if (!pattern)
         goto out;
 
+    set_entry(fields->family, NULL);
+    set_entry(fields->style, NULL);
+    set_entry(fields->file, NULL);
+    set_entry(fields->weight, NULL);
+    set_entry(fields->slant, NULL);
+    set_entry(fields->spacing, NULL);
+    set_entry(fields->postscript, NULL);
+    set_entry(fields->pattern, NULL);
+
     FcChar8 *str;
     int i;
     char buf[64];
+
+    if (FcPatternGetString(pattern, FC_POSTSCRIPT_NAME, 0, &str) == FcResultMatch)
+        set_entry(fields->postscript, (char *)str);
 
     if (FcPatternGetString(pattern, FC_FAMILY, 0, &str) == FcResultMatch)
         set_entry(fields->family, (char *)str);
@@ -72,6 +88,12 @@ font_changed_cb(GObject *object, GParamSpec *pspec, gpointer user_data)
         set_entry(fields->spacing,
             i == FC_MONO ? "Monospace" :
             i == FC_PROPORTIONAL ? "Proportional" : "Other");
+    }
+
+    FcChar8 *pattern_str = FcPatternFormat(pattern, pattern_format);
+    if (pattern_str) {
+        set_entry(fields->pattern, (char *)pattern_str);
+        FcStrFree(pattern_str);
     }
 
 out:
@@ -104,7 +126,10 @@ int
 main(int argc, char **argv)
 {
     gtk_init(&argc, &argv);
-    FcInit();
+    if (!FcInit()) {
+        g_printerr("Failed to initialize Fontconfig\n");
+        return 1;
+    }
 
     GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title(GTK_WINDOW(window), "GTK3 Font Viewer");
@@ -127,6 +152,8 @@ main(int argc, char **argv)
     gtk_box_pack_start(GTK_BOX(meta), labeled_entry(&fields->weight,  "Weight"), FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(meta), labeled_entry(&fields->slant,   "Slant"), FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(meta), labeled_entry(&fields->spacing, "Spacing"), FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(meta), labeled_entry(&fields->postscript, "PostScript Name"), FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(meta), labeled_entry(&fields->pattern, "Fontconfig Pattern"), FALSE, FALSE, 0);
 
     g_signal_connect(chooser, "notify::font",
                      G_CALLBACK(font_changed_cb), fields);
@@ -138,5 +165,7 @@ main(int argc, char **argv)
     gtk_widget_show_all(window);
 
     gtk_main();
+    FcFini();
+    g_free(fields);
     return 0;
 }
