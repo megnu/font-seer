@@ -178,6 +178,8 @@ main(int argc, char **argv)
     gtk_container_add(GTK_CONTAINER(window), root);
     gtk_widget_show_all(window);
 
+    g_object_notify(G_OBJECT(chooser), "font");
+
     gtk_main();
     FcFini();
     g_free(fields);
