@@ -61,15 +61,21 @@ font_changed_cb(GObject *object, GParamSpec *pspec, gpointer user_data)
     FcChar8 *str;
     int i;
     char buf[64];
+    const char *family_str = NULL;
+    const char *style_str = NULL;
 
     if (FcPatternGetString(pattern, FC_POSTSCRIPT_NAME, 0, &str) == FcResultMatch)
         set_entry(fields->postscript, (char *)str);
 
-    if (FcPatternGetString(pattern, FC_FAMILY, 0, &str) == FcResultMatch)
+    if (FcPatternGetString(pattern, FC_FAMILY, 0, &str) == FcResultMatch) {
+        family_str = (char *)str;
         set_entry(fields->family, (char *)str);
+    }
 
-    if (FcPatternGetString(pattern, FC_STYLE, 0, &str) == FcResultMatch)
+    if (FcPatternGetString(pattern, FC_STYLE, 0, &str) == FcResultMatch) {
+        style_str = (char *)str;
         set_entry(fields->style, (char *)str);
+    }
 
     if (FcPatternGetString(pattern, FC_FILE, 0, &str) == FcResultMatch)
         set_entry(fields->file, (char *)str);
@@ -90,10 +96,16 @@ font_changed_cb(GObject *object, GParamSpec *pspec, gpointer user_data)
             i == FC_PROPORTIONAL ? "Proportional" : "Other");
     }
 
-    FcChar8 *pattern_str = FcPatternFormat(pattern, pattern_format);
-    if (pattern_str) {
-        set_entry(fields->pattern, (char *)pattern_str);
-        FcStrFree(pattern_str);
+    if (family_str || style_str) {
+        char name_buf[128];
+        if (family_str && style_str)
+            g_snprintf(name_buf, sizeof name_buf, "%s %s", family_str, style_str);
+        else
+            g_snprintf(name_buf, sizeof name_buf,
+                       "%s%s",
+                       family_str ? family_str : "",
+                       style_str ? style_str : "");
+        set_entry(fields->pattern, name_buf);
     }
 
 out:
@@ -152,8 +164,8 @@ main(int argc, char **argv)
     gtk_box_pack_start(GTK_BOX(meta), labeled_entry(&fields->weight,  "Weight"), FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(meta), labeled_entry(&fields->slant,   "Slant"), FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(meta), labeled_entry(&fields->spacing, "Spacing"), FALSE, FALSE, 0);
-    gtk_box_pack_start(GTK_BOX(meta), labeled_entry(&fields->postscript, "PostScript Name"), FALSE, FALSE, 0);
-    gtk_box_pack_start(GTK_BOX(meta), labeled_entry(&fields->pattern, "Fontconfig Pattern"), FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(meta), labeled_entry(&fields->postscript, "PostScript"), FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(meta), labeled_entry(&fields->pattern, "Fontconfig"), FALSE, FALSE, 0);
 
     g_signal_connect(chooser, "notify::font",
                      G_CALLBACK(font_changed_cb), fields);
