@@ -153,6 +153,8 @@ main(int argc, char **argv)
     GtkWidget *chooser = gtk_font_chooser_widget_new();
     gtk_box_pack_start(GTK_BOX(root), chooser, TRUE, TRUE, 0);
 
+    gtk_font_chooser_set_font(GTK_FONT_CHOOSER(chooser), "Sans Regular 14");
+
     FontFields *fields = g_new0(FontFields, 1);
 
     GtkWidget *meta = gtk_box_new(GTK_ORIENTATION_VERTICAL, 4);
