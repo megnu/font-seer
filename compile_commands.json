@@ -1,14 +1,14 @@
 [
   {
-    "file": "font_viewer.c",
+    "file": "font_seer.c",
     "arguments": [
       "gcc",
       "-Wall",
       "-Wextra",
       "-O2",
-      "font_viewer.c",
+      "font_seer.c",
       "-o",
-      "font_viewer",
+      "font_seer",
       "-I/usr/include/gtk-3.0",
       "-I/usr/include/pango-1.0",
       "-I/usr/include/cloudproviders",
@@ -34,6 +34,6 @@
       "-pthread"
     ],
     "directory": "/home/blacklung/Templates/font-seer",
-    "output": "font_viewer"
+    "output": "font_seer"
   }
 ]

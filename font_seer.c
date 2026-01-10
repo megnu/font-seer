@@ -163,25 +163,9 @@ main(int argc, char **argv)
     gtk_box_pack_start(GTK_BOX(meta), labeled_entry(&fields->family,  "Family"), FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(meta), labeled_entry(&fields->style,   "Style"), FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(meta), labeled_entry(&fields->file,    "File"), FALSE, FALSE, 0);
-
-    GtkWidget *attribute_grid = gtk_grid_new();
-    gtk_grid_set_column_spacing(GTK_GRID(attribute_grid), 8);
-    gtk_widget_set_hexpand(attribute_grid, TRUE);
-
-    GtkWidget *weight_row = labeled_entry(&fields->weight,  "Weight");
-    GtkWidget *slant_row = labeled_entry(&fields->slant,   "Slant");
-    GtkWidget *spacing_row = labeled_entry(&fields->spacing, "Spacing");
-
-    gtk_widget_set_hexpand(weight_row, TRUE);
-    gtk_widget_set_hexpand(slant_row, TRUE);
-    gtk_widget_set_hexpand(spacing_row, TRUE);
-
-    gtk_grid_attach(GTK_GRID(attribute_grid), weight_row, 0, 0, 1, 1);
-    gtk_grid_attach(GTK_GRID(attribute_grid), slant_row,  1, 0, 1, 1);
-    gtk_grid_attach(GTK_GRID(attribute_grid), spacing_row, 2, 0, 1, 1);
-
-    gtk_box_pack_start(GTK_BOX(meta), attribute_grid, FALSE, FALSE, 0);
-
+    gtk_box_pack_start(GTK_BOX(meta), labeled_entry(&fields->weight,  "Weight"), FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(meta), labeled_entry(&fields->slant,   "Slant"), FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(meta), labeled_entry(&fields->spacing, "Spacing"), FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(meta), labeled_entry(&fields->postscript, "PostScript"), FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(meta), labeled_entry(&fields->pattern, "Fontconfig"), FALSE, FALSE, 0);
 
