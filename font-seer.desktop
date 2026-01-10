@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Font Seer
+GenericName=Font Metadata Viewer
+Comment=Browse fontconfig metadata for installed fonts
+Exec=font-seer
+Icon=font-seer
+Terminal=false
+Type=Application
+Categories=Graphics;GTK;
