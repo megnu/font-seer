@@ -33,7 +33,7 @@
       "-I/usr/include/sysprof-6",
       "-pthread"
     ],
-    "directory": "/home/blacklung/Templates/font-seer",
+    "directory": "/home/blacklung/Programs/font-seer",
     "output": "font_seer"
   }
 ]
