@@ -66,4 +66,3 @@ font-seer
 
 - `font-seer` uses Semantic Versioning (`MAJOR.MINOR.PATCH`).
 - The canonical version is stored in `VERSION`.
-- Arch packaging keeps `pkgrel` as a separate package release field.
