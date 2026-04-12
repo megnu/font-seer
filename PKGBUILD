@@ -10,7 +10,7 @@ source=('VERSION' 'main.c' 'Makefile' 'font-seer.png' 'font-seer.desktop' 'READM
 md5sums=('c9e47dbb0e1927076ed7b2e1ec157be7'
          '4c9dc735f36f4898fa09bf798fd29d05'
          '82d15ed78949ef7ff833db9797523a21'
-         'c03a941223360edfaf9adc5713a98c51'
+         '82e32043e32477f0ba29a306a150b4be'
          'd3b41f0bbc404fd74f146ecef34fc974'
          'd6706d4b4dda5ab47e61a98fc84ba2b9'
          '25c7d05590dacead9a79e91e7d39f2cb')
