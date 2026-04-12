@@ -6,14 +6,14 @@ arch=('x86_64')
 license=('GPL-2.0-or-later')
 depends=('gtk3' 'fontconfig' 'pango')
 makedepends=('pkg-config' 'gcc' 'make')
-source=('VERSION' 'font_seer.c' 'Makefile' 'font-seer.png' 'font-seer.desktop' 'README.md' 'LICENSE')
-md5sums=('1347633cdf7cdcb2168d61093630d5ae'
-         '64b37d9dd293dc458f945351edb52a2f'
-         '7b229262d017e8f6971f21945fe2ce27'
+source=('VERSION' 'main.c' 'Makefile' 'font-seer.png' 'font-seer.desktop' 'README.md' 'LICENSE')
+md5sums=('c9e47dbb0e1927076ed7b2e1ec157be7'
+         '4c9dc735f36f4898fa09bf798fd29d05'
+         '82d15ed78949ef7ff833db9797523a21'
          'c03a941223360edfaf9adc5713a98c51'
          'd3b41f0bbc404fd74f146ecef34fc974'
-         '5acbcbd9625c0911289484a26d23bbd2'
-         'cf370a5ad92d905c270a6031f24db592')
+         'd6706d4b4dda5ab47e61a98fc84ba2b9'
+         '25c7d05590dacead9a79e91e7d39f2cb')
 
 build() {
   cd "$srcdir"
