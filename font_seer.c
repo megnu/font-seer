@@ -9,7 +9,6 @@ typedef struct {
     GtkWidget *file;
     GtkWidget *weight;
     GtkWidget *slant;
-    //    GtkWidget *spacing;
     GtkWidget *postscript;
     GtkWidget *pattern;
 } FontFields;
@@ -54,7 +53,6 @@ font_changed_cb(GObject *object, GParamSpec *pspec, gpointer user_data)
     set_entry(fields->file, NULL);
     set_entry(fields->weight, NULL);
     set_entry(fields->slant, NULL);
-    //    set_entry(fields->spacing, NULL);
     set_entry(fields->postscript, NULL);
     set_entry(fields->pattern, NULL);
 
@@ -89,12 +87,6 @@ font_changed_cb(GObject *object, GParamSpec *pspec, gpointer user_data)
         g_snprintf(buf, sizeof buf, "%d", i);
         set_entry(fields->slant, buf);
     }
-
-    /*    if (FcPatternGetInteger(pattern, FC_SPACING, 0, &i) == FcResultMatch)
-    { set_entry(fields->spacing, i == FC_MONO ? "Monospace" : i ==
-    FC_PROPORTIONAL ? "Proportional" : "Other");
-    }
-    */
 
     if (family_str || style_str) {
         char name_buf[128];
@@ -165,7 +157,6 @@ main(int argc, char **argv)
     gtk_box_pack_start(GTK_BOX(meta), labeled_entry(&fields->file,    "File"), FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(meta), labeled_entry(&fields->weight,  "Weight"), FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(meta), labeled_entry(&fields->slant,   "Slant"), FALSE, FALSE, 0);
-    //    gtk_box_pack_start(GTK_BOX(meta), labeled_entry(&fields->spacing, "Spacing"), FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(meta), labeled_entry(&fields->postscript, "PostScript"), FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(meta), labeled_entry(&fields->pattern, "Fontconfig"), FALSE, FALSE, 0);
 
