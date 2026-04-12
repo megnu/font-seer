@@ -5,6 +5,8 @@ A simple GTK3 font preview and metadata viewer for installed fonts.
 
 SPDX-License-Identifier: GPL-2.0-or-later
 
+![font-seer-screenshot](https://github.com/user-attachments/assets/dfb9370e-0610-44c9-85f4-95671e12ecb4)
+
 ## Requirements
 
 Build requirements:
