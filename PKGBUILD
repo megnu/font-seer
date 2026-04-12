@@ -9,7 +9,7 @@ makedepends=('pkg-config' 'gcc' 'make')
 source=('font_seer.c' 'Makefile' 'font-seer.png' 'font-seer.desktop')
 md5sums=('64b37d9dd293dc458f945351edb52a2f'
          '7b229262d017e8f6971f21945fe2ce27'
-         '2a9c9fad25d86102113728692ad9df37'
+         'c03a941223360edfaf9adc5713a98c51'
          'd3b41f0bbc404fd74f146ecef34fc974')
 
 build() {
